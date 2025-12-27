@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Runtime.Loader;
 using System.Threading;
 
 using ArkBotFramework.ArkWindow;
@@ -33,7 +34,7 @@ namespace ArkBotFramework.Infrastructure
         {
             _screenCapture = screenCapture;
             _logTemplate = logTemplate ?? Console.WriteLine;
-            _iconsPath = $"icons{_screenCapture.ScreenResolution}";
+            _iconsPath = Path.Join(AppContext.BaseDirectory, "icons", _screenCapture.ScreenResolution.ToString());
             _roiRegions = InitializeRoiRegions();
         }
 
@@ -44,6 +45,24 @@ namespace ArkBotFramework.Infrastructure
         {
             return new Dictionary<string, RoiRegion>
             {
+                // Reconnection & Menu regions
+                { "accept", new RoiRegion(1220, 958, 100, 30) },
+                { "escape", new RoiRegion(2330, 110, 60, 50) },
+                { "join_last_session", new RoiRegion(1135, 1250, 300, 50) },
+                { "join_game", new RoiRegion(446, 1000, 600, 60) },
+                { "join_button", new RoiRegion(2230, 1230, 100, 50) },
+                { "multiplayer", new RoiRegion(100, 110, 85, 60) },
+                { "server_full", new RoiRegion(1330, 460, 250, 60) },
+                { "red_fail", new RoiRegion(1330, 460, 250, 60) },
+                { "mod_join", new RoiRegion(2255, 1225, 100, 60) },
+                { "req_mods", new RoiRegion(965, 187, 200, 50) },
+                { "join_text", new RoiRegion(900, 635, 400, 30) },
+                { "loading_screen", new RoiRegion(0, 0, 500, 500) },
+                { "searching", new RoiRegion(1160, 635, 120, 40) },
+                { "no_session", new RoiRegion(1260, 635, 150, 40) },
+                { "connection_timeout", new RoiRegion(1025, 460, 200, 55) },
+                
+                // Gameplay regions
                 { "bed_radical", new RoiRegion(1120, 345, 250, 250) },
                 { "beds_title", new RoiRegion(100, 100, 740, 180) },
                 { "console", new RoiRegion(0, 1400, 50, 40) },
