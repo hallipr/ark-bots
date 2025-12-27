@@ -1,5 +1,72 @@
 # ARK Gacha Bot - Class Diagram
 
+## Python to C# Migration Checklist
+
+### Core Infrastructure
+- [x] ScreenCapture (screen.py) → ScreenCapture.cs
+- [x] WindowManager (windows.py) → WindowManager.cs
+- [x] TemplateMatching (template.py, recon_utils.py) → TemplateMatching.cs
+- [ ] InputManager (utils.py) → (Not yet created)
+- [x] LocalPlayer (local_player.py) → (Functionality in Configuration/BotSettings.cs)
+- [ ] VariableManager (variables.py) → (Not yet created)
+
+### Configuration & Settings
+- [ ] Settings (settings.py) → Configuration/BotSettings.cs (partial)
+
+### Reconnection System
+- [x] CrashHandler (reconnect/crash.py) → ArkWindow/CrashHandler.cs
+- [x] ReconnectSystem (reconnect/start.py) → ArkWindow/ReconnectSystem.cs
+- [x] MainMenu (reconnect/main_menu.py) → ArkWindow/MainMenu.cs
+- [x] MultiplayerMenu (reconnect/multiplayer_menu.py) → ArkWindow/MultiplayerMenu.cs
+- [x] ReconUtils (reconnect/recon_utils.py) → TemplateMatching.cs (merged)
+
+### Task Management
+- [ ] PriorityQueueExecution (task_manager.py: priority_queue_exc) → Tasks/PriorityQueueExecution.cs (partial)
+- [ ] PriorityQueuePriority (task_manager.py: priority_queue_prio) → Tasks/PriorityQueuePriority.cs (partial)
+- [ ] TaskScheduler (task_manager.py: task_scheduler) → (Not yet created)
+
+### Bot Tasks
+- [ ] BaseTask (bot/stations.py: base_task) → (Not yet created)
+- [ ] GachaStation (bot/stations.py: gacha_station) → (Not yet created)
+- [ ] PegoStation (bot/stations.py: pego_station) → (Not yet created)
+- [ ] RenderStation (bot/stations.py: render_station) → (Not yet created)
+- [ ] SnailPheonix (bot/stations.py: snail_pheonix) → (Not yet created)
+- [ ] PauseTask (bot/stations.py: pause) → (Not yet created)
+
+### ASA Game Interaction
+- [ ] Inventory (ASA/inventories/inventory.py) → (Not yet created)
+- [ ] CheckBuffs (ASA/player/buffs.py) → (Not yet created)
+- [ ] Console (ASA/player/console.py) → (Not yet created)
+- [ ] PlayerInventory (ASA/player/player_inventory.py) → (Not yet created)
+- [ ] PlayerState (ASA/player/player_state.py) → (Not yet created)
+- [ ] Tribelog (ASA/player/tribelog.py) → (Not yet created)
+- [ ] StationMetadata (ASA/stations/custom_stations.py) → (Not yet created)
+- [ ] Bed (ASA/structures/bed.py) → (Not yet created)
+- [ ] StructureInventory (ASA/structures/inventory.py) → (Not yet created)
+- [ ] Teleporter (ASA/structures/teleporter.py) → (Not yet created)
+- [ ] ShoulderMounts (ASA/dinosaurs/shoulder_mounts.py) → (Not yet created)
+
+### Crafting
+- [ ] HeavyTurret (crafting/calculator.py: heavy_turret) → (Not yet created)
+- [ ] Replicator (crafting/replicatior.py) → (Not yet created)
+- [ ] ChemBench (crafting/ARB/chembench.py) → (Not yet created)
+- [ ] Forge (crafting/ARB/forge.py) → (Not yet created)
+- [ ] ResourceChecks (crafting/ARB/resource_checks.py) → (Not yet created)
+
+### Bot Logic
+- [ ] Deposit (bot/deposit.py) → (Not yet created)
+- [ ] Gacha (bot/gacha.py) → (Not yet created)
+- [ ] Iguanadon (bot/iguanadon.py) → (Not yet created)
+- [ ] Pego (bot/pego.py) → (Not yet created)
+- [ ] Render (bot/render.py) → (Not yet created)
+
+### Logging
+- [ ] BotOptions (logs/botoptions.py) → (Not yet created)
+- [ ] DiscordBot (logs/discordbot.py) → (Not yet created)
+- [ ] GachaLogs (logs/gachalogs.py) → (Not yet created)
+
+---
+
 ## Architecture Overview
 
 This is an automated bot for ARK: Survival Ascended that manages Gacha creatures and performs various in-game tasks through screen capture, template matching, and input automation.

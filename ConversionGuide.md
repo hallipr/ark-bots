@@ -1,3 +1,0 @@
-- Use ILogger for logging
-- Prefer c# keywords and .net primitives over custom classes
-- Prefer .net framework and Microsoft nuget packages over 3rd party packages
