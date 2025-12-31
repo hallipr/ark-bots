@@ -1,14 +1,10 @@
 <Solution>
-  <Folder Name="/bots/" />
-  <Folder Name="/bots/GochaBot/" />
-  <Folder Name="/bots/GochaBot/src/">
-    <Project Path="bots/GochaBot/src/GochaBot.csproj" />
+  <Folder Name="/src/">
+    <Project Path="src/BotFramework.Core/BotFramework.Core.csproj" />
   </Folder>
-  <Folder Name="/core/" />
-  <Folder Name="/core/src/">
-    <Project Path="core/src/ArkBotFramework.csproj" />
+  <Folder Name="/tests/">
+    <Project Path="tests/BotFramework.Core.Tests/BotFramework.Core.Tests.csproj" />
   </Folder>
-  <Folder Name="/docs/" />
   <Properties Name="Configuration">
     <Property Name="Debug" />
     <Property Name="Release" />
