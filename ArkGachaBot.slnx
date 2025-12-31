@@ -5,6 +5,9 @@
   <Folder Name="/tests/">
     <Project Path="tests/BotFramework.Core.Tests/BotFramework.Core.Tests.csproj" />
   </Folder>
+  <Folder Name="/tests/resources/">
+    <File Path="tests/resources/**/*.png" />
+  </Folder>
   <Properties Name="Configuration">
     <Property Name="Debug" />
     <Property Name="Release" />
