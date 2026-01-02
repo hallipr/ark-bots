@@ -2,6 +2,8 @@ using System.Drawing;
 using BotFramework.Core.Vision;
 
 using Moq;
+
+using OpenCvSharp;
 namespace BotFramework.Core.Tests.Vision;
 
 [TestClass]
@@ -59,6 +61,65 @@ public sealed class TemplateMatcherTests
 
         // Assert - Results may differ due to color filtering
         Assert.IsGreaterThan(0.8, similarityTrue, "Similarity with standard bounds should be in valid range");
+    }
+
+    [TestMethod]
+    public void MatchTemplate_WithoutGrayscale_OnlyNormalizedHsv()
+    {
+        // Arrange
+        var matcher = new TemplateMatcher(Mock.Of<IScreenCapturer>(), $"{RepositoryRoot}/.work");
+        using var image = LoadTestResourceImage("incubator_egg_status_1080.png");
+        using var template = LoadTestResourceImage("incubator_egg_status_stamina_1080.png");
+
+        // Act - with standard bounds (color filtering)
+        var (_, similarityTrue) = matcher.MatchTemplate(image, template, grayscale: true);
+        var (_, similarityFalse) = matcher.MatchTemplate(image, template, grayscale: false);
+
+        // Assert - Results may differ due to color filtering
+        Assert.IsGreaterThan(0.8, similarityTrue, "Similarity with grayscale should be in valid range");
+        Assert.IsGreaterThan(0.8, similarityFalse, "Similarity without grayscale should be in valid range");
+    }
+
+    private static Scalar Shift(Scalar value, double multiplier)
+    {
+        return new Scalar(
+            Shift((int)value.Val0, multiplier, 0, 180),
+            Shift((int)value.Val1, multiplier, 0, 255),
+            Shift((int)value.Val2, multiplier, 0, 255)
+        );
+    }
+
+    private static int Shift(int value, double multiplier, int min, int max)
+    {
+        var range = max - min;
+        var shift = (int)(multiplier * range);
+        return int.Clamp(value + shift, min, max);
+    }
+
+    [TestMethod]
+    public void MatchTemplate_WithTunedHsvBounds_ReturnsHigherSimilarity()
+    {
+        // Arrange
+        var matcher = new TemplateMatcher(Mock.Of<IScreenCapturer>(), $"{RepositoryRoot}/.work");
+        using var image = LoadTestResourceImage("incubator_egg_status_1080.png");
+        using var template = LoadTestResourceImage("incubator_egg_status_stamina_1080.png");
+
+        // color = HSV 189.7 / 360, 0.267, 1.0
+        var hsv = new Scalar(
+            (int)(189.7 / 360 * 180),
+            (int)(0.267 * 255),
+            255);
+
+        var lowerBoundary = Shift(hsv, -0.20);
+        var upperBoundry = Shift(hsv, 0.20);
+
+        // Act - with standard bounds (color filtering)
+        var (_, standard) = matcher.MatchTemplate(image, template, standardBounds: true, grayscale: true, maskAlpha: true);
+        var (_, custom) = matcher.MatchTemplate(image, template, lowerBoundary, upperBoundry, grayscale: true, maskAlpha: true);
+
+        // Assert - Results may differ due to color filtering
+        Assert.IsGreaterThan(0.8, custom, "Similarity with custom bounds should be in valid range");
+        Assert.IsGreaterThan(0.8, standard, "Similarity with standard bounds should be in valid range");
     }
 
     [TestMethod]
