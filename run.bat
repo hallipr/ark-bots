@@ -21,14 +21,10 @@ if errorlevel 1 (
     echo Python is already installed. Please make sure its of version 3.10 or higher, using an older version will NOT work!
 )
 
-:: Pull updates from Git
-git pull origin main
-git pull
-
 :: Check if virtual environment exists
-if not exist "venv" (
+if not exist ".venv" (
     echo Virtual environment not found. Creating a new one using Python %PYTHON_VERSION%...
-    py -%PYTHON_VERSION% -m venv venv
+    py -%PYTHON_VERSION% -m venv .venv
     if errorlevel 1 (
         echo Failed to create virtual environment with Python %PYTHON_VERSION%. Ensure Python is installed and accessible.
         pause

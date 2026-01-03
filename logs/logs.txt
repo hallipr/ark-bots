@@ -1,0 +1,10 @@
+16:27:11 - WARNING - __init__ - PyNaCl is not installed, voice will NOT be supported
+16:27:11 - DEBUG - event - on_ready has successfully been registered as an event
+16:29:52 - WARNING - __init__ - PyNaCl is not installed, voice will NOT be supported
+16:29:52 - DEBUG - event - on_ready has successfully been registered as an event
+16:30:08 - WARNING - __init__ - PyNaCl is not installed, voice will NOT be supported
+16:30:08 - DEBUG - event - on_ready has successfully been registered as an event
+16:31:32 - WARNING - __init__ - PyNaCl is not installed, voice will NOT be supported
+16:31:32 - DEBUG - event - on_ready has successfully been registered as an event
+16:32:06 - WARNING - __init__ - PyNaCl is not installed, voice will NOT be supported
+16:32:06 - DEBUG - event - on_ready has successfully been registered as an event

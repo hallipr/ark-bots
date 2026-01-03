@@ -5,9 +5,7 @@ from pathlib import Path
 import time 
 
 def path(process_name):
-    print("finding path now ")
     for proc in psutil.process_iter(attrs=[ 'name', 'exe']):
-        
         if proc.info['name'] == process_name:
             exe_path = proc.info['exe']
             return Path(exe_path)
@@ -19,7 +17,6 @@ except Exception as e:
     exit()
 
 def get_user_settings(setting_name):
-
     settings_path = os.path.join(base_path, "ShooterGame", "Saved", "Config", "Windows", "GameUserSettings.ini")
     if not os.path.exists(settings_path):
         raise FileNotFoundError(f"Settings file not found: {settings_path}")
@@ -40,14 +37,12 @@ def get_fov():
     return float(get_user_settings("FOVMultiplier"))
 
 def get_input_settings(input_name):
-
     input_path = os.path.join(base_path, "ShooterGame", "Saved", "Config", "Windows", "input.ini")
     
     if not os.path.exists(input_path):
         raise FileNotFoundError(f"Input settings file not found: {input_path}")
 
     with open(input_path, "r") as file:
-
         if input_name == "ConsoleKeys":
             for line in file:
                 if input_name in line:

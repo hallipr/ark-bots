@@ -44,7 +44,6 @@ max_ud_sens = 3.2
 max_fov = 1.25
 
 def turn(x: int, y: int):
-    
     dx = int(round(x * PIXELS_PER_DEGREE * (max_lr_sens / local_player.get_look_lr_sens()) * (max_fov / local_player.get_fov())))
     dy = int(round(y * PIXELS_PER_DEGREE * (max_ud_sens / local_player.get_look_ud_sens()) * (max_fov / local_player.get_fov())))
 
@@ -71,7 +70,6 @@ ctypes.windll.user32.PostMessageW.argtypes = [ctypes.c_void_p, ctypes.c_uint, ct
 ctypes.windll.user32.PostMessageW.restype = ctypes.c_int
 
 def move_mouse(x, y):
-
     scaled_x = int(x * 65535 / screen.mon["width"])
     scaled_y = int(y * 65535 / screen.mon["height"])
 
